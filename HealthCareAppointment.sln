@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{BDF6A3AB-3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Auth\Auth\Auth.csproj", "{CA099E09-52E3-4BB0-8305-8CEF48B6456E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{81F5FF52-E221-41E4-82A7-1369312CB062}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared\Shared.csproj", "{D3FFF322-89EB-4367-B4BC-9BBE36DF3C86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +21,17 @@ Global
 		{CA099E09-52E3-4BB0-8305-8CEF48B6456E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA099E09-52E3-4BB0-8305-8CEF48B6456E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA099E09-52E3-4BB0-8305-8CEF48B6456E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3FFF322-89EB-4367-B4BC-9BBE36DF3C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3FFF322-89EB-4367-B4BC-9BBE36DF3C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3FFF322-89EB-4367-B4BC-9BBE36DF3C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3FFF322-89EB-4367-B4BC-9BBE36DF3C86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CA099E09-52E3-4BB0-8305-8CEF48B6456E} = {BDF6A3AB-39FE-4DB1-AFD0-867E290379E0}
+		{D3FFF322-89EB-4367-B4BC-9BBE36DF3C86} = {81F5FF52-E221-41E4-82A7-1369312CB062}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1DF76F1-E512-4083-B68E-D7A24ABD8AD2}
