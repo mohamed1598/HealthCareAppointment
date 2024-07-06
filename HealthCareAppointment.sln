@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{63935649-2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patient.API", "Patient Management\Apps\Patient.API\Patient.API.csproj", "{641D8BCF-F6D6-48FA-B228-F483E797ED4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMq", "Shared\RabbitMq\RabbitMq.csproj", "{7FA3DDFE-F05B-4289-8462-011902448E0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{641D8BCF-F6D6-48FA-B228-F483E797ED4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{641D8BCF-F6D6-48FA-B228-F483E797ED4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{641D8BCF-F6D6-48FA-B228-F483E797ED4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FA3DDFE-F05B-4289-8462-011902448E0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FA3DDFE-F05B-4289-8462-011902448E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FA3DDFE-F05B-4289-8462-011902448E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FA3DDFE-F05B-4289-8462-011902448E0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{B08980B7-F38E-4BBC-8175-6F5E8254E4C1} = {1F65B006-7741-4273-8BDD-A74B02C2D830}
 		{63935649-293C-461C-87BA-88CC55843BB8} = {3A81D967-EDD3-4E73-B027-F5498394A69E}
 		{641D8BCF-F6D6-48FA-B228-F483E797ED4A} = {63935649-293C-461C-87BA-88CC55843BB8}
+		{7FA3DDFE-F05B-4289-8462-011902448E0A} = {81F5FF52-E221-41E4-82A7-1369312CB062}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1DF76F1-E512-4083-B68E-D7A24ABD8AD2}
