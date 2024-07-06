@@ -33,7 +33,7 @@ public class Result
     public static Result<TValue> Success<TValue>(TValue value)
         => new(value,true,Error.None);
 
-    internal static Result<TValue> Failure<TValue>(Error error) where TValue:class
+    public static Result<TValue> Failure<TValue>(Error error) where TValue: class
         => new(null,false, error);
 
     protected static Result<TValue> Create<TValue>(TValue value)
