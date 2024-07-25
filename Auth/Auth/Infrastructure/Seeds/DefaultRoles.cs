@@ -9,7 +9,8 @@ public static class DefaultRoles
     {
         if (!roleManager.Roles.Any())
         {
-            await roleManager.CreateAsync(new IdentityRole(AppRoles.NoProfileUser));
+            await roleManager.CreateAsync(new IdentityRole(AppRoles.Patient));
+            await roleManager.CreateAsync(new IdentityRole(AppRoles.Doctor));
         }
     }
 }

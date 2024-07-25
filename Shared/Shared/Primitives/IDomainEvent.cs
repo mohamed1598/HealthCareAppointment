@@ -2,6 +2,6 @@
 
 namespace Shared.Primitives;
 
-public interface IDomainEvent : INotification
+public interface IDomainEvent : IRequest
 {
 }

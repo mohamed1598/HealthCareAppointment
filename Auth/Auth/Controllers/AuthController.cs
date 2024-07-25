@@ -1,9 +1,11 @@
 ﻿using Auth.Commands;
 using Auth.Dtos;
+using Auth.Queries.IsUserIdValid;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Result;
 using System.Linq;
 
 namespace Auth.Controllers
@@ -20,10 +22,10 @@ namespace Auth.Controllers
             var result = await _mediator.Send(new RegisterUserCommand(request.Email, request.Password));
             if (!result.Succeeded)
             {
-                return BadRequest(string.Join(" , ", result.Errors.Select(e => e.Description).ToArray()));
+                return BadRequest(result);
             }
 
-            return Ok("User registered successfully.");
+            return Ok(Result.Success("user registered successfully"));
         }
 
         [HttpPost("login")]
@@ -44,6 +46,12 @@ namespace Auth.Controllers
                 return BadRequest(string.Join(" , ",result.Errors.Select(e => e.Description))); 
 
             return Ok("password resetted successfully");
+        }
+
+        [HttpGet("get-userId")]
+        public async Task<IActionResult> IsUserIdValid([FromQuery]string email)
+        {
+            return Ok(await _mediator.Send(new GetUserIdByEmailQuery(email)));
         }
     }
 }

@@ -2,5 +2,6 @@
 
 public static class AppRoles
 {
-    public const string NoProfileUser = "NoProfileUser";
+    public const string Patient = "Patient";
+    public const string Doctor = "Doctor";
 }

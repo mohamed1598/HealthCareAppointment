@@ -18,7 +18,7 @@ namespace Patient.Domain.ValueObjects
 
         public static Result<DateOfBirth> Create(DateTime date)
         {
-            if (date.AddYears(MaxAge) > DateTime.Today)
+            if (date.AddYears(MaxAge) < DateTime.Today)
                 return Result.Failure<DateOfBirth>(ValueObjectErrors.DateOfBirth.Invalid);
 
             return new DateOfBirth(date);

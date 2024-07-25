@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Patient.Domain.ValueObjects;
 
-public record Email : ValueObject
+public partial record Email : ValueObject
 {
-    private static readonly Regex ValidEmailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled);
+    private static readonly Regex ValidEmailRegex = EmailRegex();
 
     public Email(string value) => Value = value;
     public string Value { get; }
@@ -27,4 +27,7 @@ public record Email : ValueObject
 
         return new Email(email);
     }
+
+    [GeneratedRegex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled)]
+    private static partial Regex EmailRegex();
 }

@@ -5,22 +5,22 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Newtonsoft.Json;
 using System.Text;
+using Shared.Result;
 
 namespace Auth.Middlewares;
 
-public class ValidatorMiddleware
+public class ValidatorMiddleware(RequestDelegate next, Assembly assembly)
 {
-    private readonly RequestDelegate _next;
-    private readonly Assembly _assembly;
-
-    public ValidatorMiddleware(RequestDelegate next, Assembly assembly)
-    {
-        _next = next;
-        _assembly = assembly;
-    }
+    private readonly RequestDelegate _next = next;
+    private readonly Assembly _assembly = assembly;
 
     public async Task Invoke(HttpContext context)
     {
+        if (!HttpMethods.IsPost(context.Request.Method))
+        {
+            await _next(context);
+            return;
+        }
         var endpoint = context.GetEndpoint();
         var actionDescriptor = endpoint?.Metadata.GetMetadata<ActionDescriptor>();
         string? requestTypeName = "";
@@ -58,7 +58,7 @@ public class ValidatorMiddleware
             var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToArray();
             context.Response.StatusCode = 400;
             context.Response.ContentType = "application/json";
-            await context.Response.WriteAsync(string.Join(", ", errors));
+            await context.Response.WriteAsJsonAsync(Result.Failure<string>(new Error("Validation",string.Join(", ", errors))));
             await context.Response.CompleteAsync();
 
         }

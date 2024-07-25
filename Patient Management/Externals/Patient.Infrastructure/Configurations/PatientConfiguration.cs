@@ -36,7 +36,7 @@ public class PatientConfiguration : IEntityTypeConfiguration<Entities.Patient>
         builder.Property(p => p.UserId)
             .HasConversion(
                 userId => userId.Value,
-                value => UserId.Create(value).Value
+                value => new UserId(value)
             );
 
         builder.OwnsOne(p => p.ContactDetails, contactDetails =>

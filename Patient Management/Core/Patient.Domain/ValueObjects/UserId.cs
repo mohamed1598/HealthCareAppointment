@@ -1,4 +1,5 @@
-﻿using Patient.Domain.Errors;
+﻿using Patient.Domain.Abstractions;
+using Patient.Domain.Errors;
 using Shared.Primitives;
 using Shared.Result;
 using System;
@@ -12,13 +13,16 @@ namespace Patient.Domain.ValueObjects;
 public record UserId : ValueObject
 {
     public UserId(string value) => Value = value;
-    public String Value { get; }
+    public string Value { get; }
 
-    public static Result<UserId> Create(string id)
+    public async static Task<Result<UserId>> Create(string email,IUserService userService)
     {
-        if (string.IsNullOrEmpty(id))
-            Result.Failure<PatientId>(ValueObjectErrors.PatientId.NotValid);
+        if (string.IsNullOrEmpty(email))
+            Result.Failure<UserId>(ValueObjectErrors.UserId.NotValid);
 
-        return new UserId(id);
+        var userIdResult = await userService.GetUserId(email);
+        if (userIdResult.IsFailure)
+            return Result.Failure<UserId>(ValueObjectErrors.UserId.NotValid);
+        return new UserId(userIdResult.Value!);
     }
 }

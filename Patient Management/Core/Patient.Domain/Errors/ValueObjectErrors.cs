@@ -103,4 +103,16 @@ public static class ValueObjectErrors
             "Treatment is too long.");
 
     }
+
+    public static class UserId
+    {
+        public static readonly Error Empty = new Error(
+        "UserId.Empty",
+        "UserId is empty.");
+
+        public static readonly Error NotValid = new Error(
+            "UserId.NotValid",
+            "UserId is not valid.");
+
+    }
 }
