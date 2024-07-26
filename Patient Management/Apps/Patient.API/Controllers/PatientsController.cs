@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Patient.Application.Patient.Commands.AddMedicalHistoryRecord;
 using Patient.Application.Patient.Commands.RegisterPatient;
+using Patient.Application.Patient.Commands.RemoveMedicalHistoryRecord;
 using Patient.Application.Patient.Commands.UpdatePatientProfile;
 using Patient.Application.Patient.Queries;
 using Patient.Domain.ValueObjects;
@@ -46,6 +47,15 @@ namespace Patient.API.Controllers
         {
             var result = await _mediator.Send(request);
             if (result.IsFailure)
+                return BadRequest(result);
+            return Ok(result);
+        }
+
+        [HttpDelete("RemoveMedicalHistoryRecord")]
+        public async Task<IActionResult> RemoveMedicalHistoryRecord([FromBody] RemoveMedicalHistoryRecordCommand request)
+        {
+            var result = await _mediator.Send(request);
+            if(result.IsFailure)
                 return BadRequest(result);
             return Ok(result);
         }

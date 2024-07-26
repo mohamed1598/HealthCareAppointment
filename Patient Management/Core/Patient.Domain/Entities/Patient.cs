@@ -1,4 +1,5 @@
-﻿using Patient.Domain.ValueObjects;
+﻿using Patient.Domain.Errors;
+using Patient.Domain.ValueObjects;
 using Shared.Primitives;
 using Shared.Result;
 using System;
@@ -44,8 +45,17 @@ public class Patient : AggregateRoot<PatientId>
         ContactDetails = contactDetails;
     }
 
-    public void AddMedicalRecordHistory(MedicalHistory history)
+    public void AddMedicalHistoryRecord(MedicalHistory history)
     {
         _medicalHistories.Add(history);
+    }
+
+    public Result<string> RemoveMedicalHistoryRecord(MedicalHistoryId id)
+    {
+        var record =_medicalHistories.FirstOrDefault(mh => mh.Id == id);
+        if(record is null) return Result.Failure<string>(MedicalHistoryErrors.NotFound);
+
+        record.IsDeleted = true;
+        return Result.Success<string>("Medical History Removed Successfully");
     }
 }

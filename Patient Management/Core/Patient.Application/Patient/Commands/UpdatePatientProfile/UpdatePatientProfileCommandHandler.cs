@@ -16,11 +16,10 @@ using Shared.IntegrationEvents;
 
 namespace Patient.Application.Patient.Commands.UpdatePatientProfile;
 
-public class UpdatePatientProfileCommandHandler(IUnitOfWork unitOfWork, IPatientRepository patientRepository, IUserService userService, IEventBus bus) : IRequestHandler<UpdatePatientProfileCommand, Result<Entities.Patient>>
+public class UpdatePatientProfileCommandHandler(IUnitOfWork unitOfWork, IPatientRepository patientRepository, IEventBus bus) : IRequestHandler<UpdatePatientProfileCommand, Result<Entities.Patient>>
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly IPatientRepository _patientRepository = patientRepository;
-    private readonly IUserService _userService = userService;
     private readonly IEventBus _bus = bus;
 
     public async Task<Result<Entities.Patient>> Handle(UpdatePatientProfileCommand request, CancellationToken cancellationToken)

@@ -7,6 +7,7 @@ public abstract class Entity<TId> :IEquatable<Entity<TId>> where TId: ValueObjec
     }
 
     public TId Id { get; private init; }
+    public bool IsDeleted { get; set; }
 
     public static bool operator ==(Entity<TId> left, Entity<TId> right)
         => left is not null && right is not null && left.Equals(right);

@@ -8,5 +8,5 @@ public interface IPatientRepository
 { 
     public void Add(Entities.Patient patient);
     public Entities.Patient? GetPatientById(PatientId id);
-    public Task<Entities.Patient?> GetPatientData(PatientId id);
+    public Task<Entities.Patient?> GetPatientDetails(PatientId id);
 }

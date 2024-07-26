@@ -14,7 +14,7 @@ public class GetPatientDataQueryHandler(IPatientRepository _patientRepository) :
 {
     public async Task<Result<Domain.Entities.Patient>> Handle(GetPatientDataQuery request, CancellationToken cancellationToken)
     {
-        var patient = await _patientRepository.GetPatientData(request.Id);
+        var patient = await _patientRepository.GetPatientDetails(request.Id);
         if (patient is null) return Result.Failure<Domain.Entities.Patient>(PatientErrors.NotFound);
         return patient;
     }

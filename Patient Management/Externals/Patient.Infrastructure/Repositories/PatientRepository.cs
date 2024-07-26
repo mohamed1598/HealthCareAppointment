@@ -20,11 +20,11 @@ public class PatientRepository(PatientDbContext context) : IPatientRepository
 
     public Domain.Entities.Patient? GetPatientById(PatientId id)
     {
-        return _context.Patients.Find(id);
+        return _context.Patients.FirstOrDefault(p => p.Id == id && !p.IsDeleted);
     }
 
-    public async Task<Domain.Entities.Patient?> GetPatientData(PatientId id)
+    public async Task<Domain.Entities.Patient?> GetPatientDetails(PatientId id)
     {
-        return await _context.Patients.Where(p => p.Id == id).Include(p => p.MedicalHistories).FirstOrDefaultAsync();
+        return await _context.Patients.Where(p => p.Id == id && !p.IsDeleted).Include(p => p.MedicalHistories).FirstOrDefaultAsync();
     }
 }

@@ -19,7 +19,7 @@ public class AddMedicalHistoryRecordCommandHandler(IPatientRepository _patientRe
         var patientId = PatientId.Create(request.PatientId);
         if (patientId.IsFailure) return Result.Failure<string>(patientId.Error!);
 
-        var patient = await _patientRepository.GetPatientData(patientId.Value!);
+        var patient = await _patientRepository.GetPatientDetails(patientId.Value!);
         if (patient is null) return Result.Failure<string>(PatientErrors.NotFound);
 
         var diagnosisResult = Diagnosis.Create(request.Diagnosis);
@@ -35,7 +35,7 @@ public class AddMedicalHistoryRecordCommandHandler(IPatientRepository _patientRe
         if(medicalHistoryResult.IsFailure)
             return Result.Failure<string>(medicalHistoryResult.Error!);
 
-        patient.AddMedicalRecordHistory(medicalHistoryResult.Value!);
+        patient.AddMedicalHistoryRecord(medicalHistoryResult.Value!);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
