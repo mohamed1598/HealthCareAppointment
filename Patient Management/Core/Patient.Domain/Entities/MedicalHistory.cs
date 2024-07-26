@@ -24,12 +24,11 @@ namespace Patient.Domain.Entities
 
         public static Result<MedicalHistory> Create(Diagnosis diagnosis, Treatment treatment,DateTime date,PatientId patientId)
         {
-            var gatheringIdResult = MedicalHistoryId.Create(Guid.NewGuid());
-            if (gatheringIdResult.IsFailure)
-                //log
-                return Result.Failure<MedicalHistory>(gatheringIdResult.Error!);
+            var MedicalHistoryIdResult = MedicalHistoryId.Create(Guid.NewGuid());
+            if (MedicalHistoryIdResult.IsFailure)
+                return Result.Failure<MedicalHistory>(MedicalHistoryIdResult.Error!);
             
-            return new MedicalHistory(gatheringIdResult.Value, diagnosis, treatment, date,patientId);
+            return new MedicalHistory(MedicalHistoryIdResult.Value!, diagnosis, treatment, date,patientId);
 
         }
     }

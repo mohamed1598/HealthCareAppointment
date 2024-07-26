@@ -2,8 +2,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Patient.Application.Patient.Commands.AddMedicalHistoryRecord;
 using Patient.Application.Patient.Commands.RegisterPatient;
 using Patient.Application.Patient.Commands.UpdatePatientProfile;
+using Patient.Application.Patient.Queries;
+using Patient.Domain.ValueObjects;
 using Shared.Result;
 
 namespace Patient.API.Controllers
@@ -29,7 +32,22 @@ namespace Patient.API.Controllers
             var result = await _mediator.Send(request);
             if (result.IsFailure)
                 return BadRequest(result);
-            return Ok(Result.Success("patinet profile updated successfully."));
+            return Ok(Result.Success("patient profile updated successfully."));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPatientDetails(Guid id)
+        {
+            return Ok(await _mediator.Send(new GetPatientDataQuery(new PatientId(id))));
+        }
+
+        [HttpPost("AddMedicalHistoryRecord")]
+        public async Task<IActionResult> AddMedicalHistoryRecord([FromBody] AddMedicalHistoryRecordCommand request)
+        {
+            var result = await _mediator.Send(request);
+            if (result.IsFailure)
+                return BadRequest(result);
+            return Ok(result);
         }
     }
 }

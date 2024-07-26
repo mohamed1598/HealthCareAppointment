@@ -1,4 +1,5 @@
-﻿using Patient.Domain.Abstractions;
+﻿using Microsoft.EntityFrameworkCore;
+using Patient.Domain.Abstractions;
 using Patient.Domain.ValueObjects;
 using Patient.Infrastructure.DataSource;
 using System;
@@ -20,5 +21,10 @@ public class PatientRepository(PatientDbContext context) : IPatientRepository
     public Domain.Entities.Patient? GetPatientById(PatientId id)
     {
         return _context.Patients.Find(id);
+    }
+
+    public async Task<Domain.Entities.Patient?> GetPatientData(PatientId id)
+    {
+        return await _context.Patients.Where(p => p.Id == id).Include(p => p.MedicalHistories).FirstOrDefaultAsync();
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Patient.Domain.ValueObjects;
+using System.Reflection.Emit;
 
 namespace Patient.Infrastructure.Configurations;
 
@@ -67,5 +68,10 @@ public class PatientConfiguration : IEntityTypeConfiguration<Entities.Patient>
             .HasMany(p => p.MedicalHistories)
             .WithOne()
             .HasForeignKey("PatientId");
+
+        builder
+            .Metadata
+            .FindNavigation(nameof(Domain.Entities.Patient.MedicalHistories))?
+            .SetPropertyAccessMode(PropertyAccessMode.Field);
     }
 }

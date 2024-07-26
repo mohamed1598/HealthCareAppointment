@@ -43,4 +43,9 @@ public class Patient : AggregateRoot<PatientId>
         DateOfBirth = dateOfBirth;
         ContactDetails = contactDetails;
     }
+
+    public void AddMedicalRecordHistory(MedicalHistory history)
+    {
+        _medicalHistories.Add(history);
+    }
 }
