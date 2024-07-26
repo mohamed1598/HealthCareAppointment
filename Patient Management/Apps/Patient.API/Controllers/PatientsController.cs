@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Patient.Application.Patient.Commands.RegisterPatient;
+using Patient.Application.Patient.Commands.UpdatePatientProfile;
 using Shared.Result;
 
 namespace Patient.API.Controllers
@@ -20,6 +21,15 @@ namespace Patient.API.Controllers
             if (result.IsFailure)
                 return BadRequest(result);
             return Ok(Result.Success("patinet profile registered successfully."));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdatePatientProfileCommand request)
+        {
+            var result = await _mediator.Send(request);
+            if (result.IsFailure)
+                return BadRequest(result);
+            return Ok(Result.Success("patinet profile updated successfully."));
         }
     }
 }

@@ -17,8 +17,8 @@ public class PatientRepository(PatientDbContext context) : IPatientRepository
         _context.Add(patient);
     }
 
-    public bool isUserFound(UserId userId)
+    public Domain.Entities.Patient? GetPatientById(PatientId id)
     {
-        return _context.Patients.Any(p => p.UserId == userId);
+        return _context.Patients.Find(id);
     }
 }

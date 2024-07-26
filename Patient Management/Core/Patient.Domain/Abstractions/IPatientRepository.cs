@@ -1,9 +1,11 @@
-﻿using Patient.Domain.ValueObjects;
+﻿
+using Patient.Domain.Entities;
+using Patient.Domain.ValueObjects;
 
 namespace Patient.Domain.Abstractions;
 
 public interface IPatientRepository 
 { 
     public void Add(Entities.Patient patient);
-    public bool isUserFound(UserId userId);
+    public Entities.Patient? GetPatientById(PatientId id);
 }

@@ -21,10 +21,10 @@ public class Patient : AggregateRoot<PatientId>
         UserId = userId;
     }
 
-    public Name Name { get; set; }
-    public DateOfBirth DateOfBirth { get; set; }
-    public ContactDetails ContactDetails { get; set; }
-    public UserId UserId { get; set; }
+    public Name Name { get; private set; }
+    public DateOfBirth DateOfBirth { get; private set; }
+    public ContactDetails ContactDetails { get; private set; }
+    public UserId UserId { get; private set; }
 
     public IReadOnlyCollection<MedicalHistory> MedicalHistories => _medicalHistories;
     public static Result<Patient> Create(Name name, DateOfBirth dateOfBirth, ContactDetails contactDetails, UserId userId)
@@ -36,5 +36,11 @@ public class Patient : AggregateRoot<PatientId>
 
         return new Patient(patientIdResult.Value, name, dateOfBirth, contactDetails, userId);
 
+    }
+    public void Update(Name name, DateOfBirth dateOfBirth, ContactDetails contactDetails)
+    {
+        Name = name;
+        DateOfBirth = dateOfBirth;
+        ContactDetails = contactDetails;
     }
 }

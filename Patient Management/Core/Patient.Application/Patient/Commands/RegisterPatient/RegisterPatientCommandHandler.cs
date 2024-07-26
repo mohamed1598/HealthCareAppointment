@@ -14,7 +14,7 @@ using Auth.Commands;
 
 namespace Patient.Application.Patient.Commands.RegisterPatient;
 
-public class RegisterPatientCommandHandler(IUnitOfWork unitOfWork, IPatientRepository patientRepository, IUserService userService, IEventBus bus) : IRequestHandler<RegisterPatientCommand, Result<Entities.Patient>>
+public class UpdatePatientProfileCommandHandler(IUnitOfWork unitOfWork, IPatientRepository patientRepository, IUserService userService, IEventBus bus) : IRequestHandler<RegisterPatientCommand, Result<Entities.Patient>>
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly IPatientRepository _patientRepository = patientRepository;

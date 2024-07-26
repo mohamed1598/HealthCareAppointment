@@ -4,6 +4,7 @@ using Auth.Extensions;
 using Auth.Infrastructure;
 using Auth.Middlewares;
 using Microsoft.EntityFrameworkCore;
+using Shared.IntegrationEvents;
 using Shared.RabbitMq;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,7 @@ if (app.Environment.IsDevelopment())
 }
 var eventBus = app.Services.GetRequiredService<IEventBus>();
 eventBus.Subscribe<ProfileCreatedIntegrationEvent>();
+eventBus.Subscribe<ProfileEmailUpdatedIntegrationEvent>();
 
 app.UseHttpsRedirection();
 
