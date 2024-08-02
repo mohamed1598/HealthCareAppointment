@@ -5,6 +5,7 @@ namespace Patient.Domain.Entities
 {
     public record ContactDetails
     {
+        protected ContactDetails (){}
         internal ContactDetails(PhoneNumber phoneNumber, Email email, Address address)
         {
             PhoneNumber = phoneNumber;

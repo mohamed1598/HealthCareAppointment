@@ -1,9 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Patient.Application.Patient.Commands.RegisterPatient;
-using Patient.Application.Services;
 using Patient.Domain.Abstractions;
-using Patient.Infrastructure.DataSource;
-using Patient.Infrastructure.Repositories;
+using Patient.Infrastructure.BackgroundServices;
+using Patient.Infrastructure.Services;
+using Patient.Persistence.DataSource;
+using Patient.Persistence.Interceptors;
+using Patient.Persistence.Repositories;
+using Quartz;
+using Shared.Helpers;
 using Shared.Primitives;
 using Shared.RabbitMq;
 
@@ -11,7 +15,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var memberConnectionString = builder.Configuration.GetConnectionString("PatientConnection");
-builder.Services.AddDbContext<PatientDbContext>(x => x.UseSqlServer(memberConnectionString));
+builder.Services.AddSingleton<ConvertDomainEventsToOutboxMessagesInterceptors>();
+builder.Services.AddDbContext<PatientDbContext>((sp, optionsBuilder) =>
+    {
+        var interceptor = sp.GetService<ConvertDomainEventsToOutboxMessagesInterceptors>()!;
+        
+        optionsBuilder
+            .UseSqlServer(memberConnectionString)
+            .AddInterceptors(interceptor);
+    });
 builder.Services.AddTransient<IEventBus, RabbitMQBus>();
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -20,6 +32,24 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Regis
 builder.Services.AddHttpClient();
 builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 
+builder.Services.AddQuartz(configure =>
+{
+    var jobKey = new JobKey(nameof(ProcessOutboxMessagesJob));
+
+    configure
+        .AddJob<ProcessOutboxMessagesJob>(jobKey)
+        .AddTrigger(
+            trigger =>
+                trigger.ForJob(jobKey)
+                .WithSimpleSchedule(
+                    schedule =>
+                        schedule.WithIntervalInSeconds(10)
+                        .RepeatForever()
+                )
+        );
+});
+builder.Services.AddQuartzHostedService();
+builder.Services.AddTransient<HandlerChecker>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

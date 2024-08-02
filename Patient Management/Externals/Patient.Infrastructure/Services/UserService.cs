@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Patient.Application.Services;
+namespace Patient.Infrastructure.Services;
 
 public class UserService(IHttpClientFactory httpClientFactory, IOptions<ApiSettings> apiSettings) : IUserService
 {

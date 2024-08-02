@@ -1,4 +1,5 @@
-﻿using Patient.Domain.Errors;
+﻿using Patient.Domain.DomainEvents;
+using Patient.Domain.Errors;
 using Patient.Domain.ValueObjects;
 using Shared.Primitives;
 using Shared.Result;
@@ -13,7 +14,7 @@ namespace Patient.Domain.Entities;
 public class Patient : AggregateRoot<PatientId>
 {
     private readonly List<MedicalHistory> _medicalHistories = [];
-    protected Patient() : base(PatientId.Create(Guid.NewGuid()).Value) { }
+    protected Patient() : base(PatientId.Create(Guid.NewGuid()).Value!) { }
     internal Patient(PatientId id , Name name, DateOfBirth dateOfBirth ,ContactDetails contactDetails,UserId userId) : base(id)
     {
         Name = name;
@@ -32,10 +33,12 @@ public class Patient : AggregateRoot<PatientId>
     {
         var patientIdResult = PatientId.Create(Guid.NewGuid());
         if (patientIdResult.IsFailure)
-            //log
             return Result.Failure<Patient>(patientIdResult.Error!);
+        
+        Patient patient = new(patientIdResult.Value!, name, dateOfBirth, contactDetails, userId);
+        patient.RaiseDomainEvent(new PatientProfileCreatedDomainEvent(patientIdResult.Value!, name, dateOfBirth, contactDetails, userId));
 
-        return new Patient(patientIdResult.Value, name, dateOfBirth, contactDetails, userId);
+        return patient;
 
     }
     public void Update(Name name, DateOfBirth dateOfBirth, ContactDetails contactDetails)
@@ -43,11 +46,14 @@ public class Patient : AggregateRoot<PatientId>
         Name = name;
         DateOfBirth = dateOfBirth;
         ContactDetails = contactDetails;
+
+        RaiseDomainEvent(new PatientProfileUpdatedDomainEvent(Id, Name, DateOfBirth, ContactDetails));
     }
 
     public void AddMedicalHistoryRecord(MedicalHistory history)
     {
         _medicalHistories.Add(history);
+        RaiseDomainEvent(new PatientMedicalHistoryRecordAddedDomainEvent(Id, history));
     }
 
     public Result<string> RemoveMedicalHistoryRecord(MedicalHistoryId id)
@@ -56,6 +62,8 @@ public class Patient : AggregateRoot<PatientId>
         if(record is null) return Result.Failure<string>(MedicalHistoryErrors.NotFound);
 
         record.IsDeleted = true;
+        RaiseDomainEvent(new PatientMedicalHistoryRecordDeletedDomainEvent(Id, id));
         return Result.Success<string>("Medical History Removed Successfully");
     }
 }
+

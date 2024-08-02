@@ -19,15 +19,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Externals", "Externals", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Domain", "Patient Management\Core\Patient.Domain\Patient.Domain.csproj", "{44EE06F7-D5D0-4329-BCA7-9418E9F740AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patient.Application", "Patient Management\Core\Patient.Application\Patient.Application.csproj", "{B9BF8A43-0DCB-4462-9E7E-EDD23DBDA628}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Application", "Patient Management\Core\Patient.Application\Patient.Application.csproj", "{B9BF8A43-0DCB-4462-9E7E-EDD23DBDA628}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patient.Infrastructure", "Patient Management\Externals\Patient.Infrastructure\Patient.Infrastructure.csproj", "{B08980B7-F38E-4BBC-8175-6F5E8254E4C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Infrastructure", "Patient Management\Externals\Patient.Infrastructure\Patient.Infrastructure.csproj", "{B08980B7-F38E-4BBC-8175-6F5E8254E4C1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{63935649-293C-461C-87BA-88CC55843BB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patient.API", "Patient Management\Apps\Patient.API\Patient.API.csproj", "{641D8BCF-F6D6-48FA-B228-F483E797ED4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.API", "Patient Management\Apps\Patient.API\Patient.API.csproj", "{641D8BCF-F6D6-48FA-B228-F483E797ED4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMq", "Shared\RabbitMq\RabbitMq.csproj", "{7FA3DDFE-F05B-4289-8462-011902448E0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMq", "Shared\RabbitMq\RabbitMq.csproj", "{7FA3DDFE-F05B-4289-8462-011902448E0A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patient.Persistence", "Patient Management\Externals\Patient.Persistance\Patient.Persistence.csproj", "{D13B59EA-5478-4DEA-8213-A500EFD3EBCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC8A86A6-5E2D-43B8-AB89-1AF4FA414F9C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doctor Management", "Doctor Management", "{33C5BC3B-8B36-472D-B9F2-A5118C8A343C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +72,10 @@ Global
 		{7FA3DDFE-F05B-4289-8462-011902448E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FA3DDFE-F05B-4289-8462-011902448E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FA3DDFE-F05B-4289-8462-011902448E0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D13B59EA-5478-4DEA-8213-A500EFD3EBCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D13B59EA-5478-4DEA-8213-A500EFD3EBCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D13B59EA-5478-4DEA-8213-A500EFD3EBCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D13B59EA-5478-4DEA-8213-A500EFD3EBCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +91,7 @@ Global
 		{63935649-293C-461C-87BA-88CC55843BB8} = {3A81D967-EDD3-4E73-B027-F5498394A69E}
 		{641D8BCF-F6D6-48FA-B228-F483E797ED4A} = {63935649-293C-461C-87BA-88CC55843BB8}
 		{7FA3DDFE-F05B-4289-8462-011902448E0A} = {81F5FF52-E221-41E4-82A7-1369312CB062}
+		{D13B59EA-5478-4DEA-8213-A500EFD3EBCA} = {1F65B006-7741-4273-8BDD-A74B02C2D830}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1DF76F1-E512-4083-B68E-D7A24ABD8AD2}

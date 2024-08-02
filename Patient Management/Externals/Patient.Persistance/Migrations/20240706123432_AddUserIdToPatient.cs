@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Patient.Infrastructure.Migrations
+namespace Patient.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class AddUserIdToPatient : Migration

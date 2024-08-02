@@ -15,7 +15,7 @@ public class UpdateUserEmailCommandHandler(IServiceScopeFactory scope) : IReques
         using UserManager<IdentityUser> _userManager = scope.CreateScope().ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
         var user = await _userManager.FindByEmailAsync(request.Email);
-
+        if (user is null) return;
         user.Email = request.NewEmail;
         user.UserName = request.NewEmail;
         user.NormalizedEmail = _userManager.NormalizeEmail(request.NewEmail);

@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Patient.Infrastructure.DataSource;
+using Patient.Persistence.DataSource;
 
 #nullable disable
 
-namespace Patient.Infrastructure.Migrations
+namespace Patient.Persistence.Migrations
 {
     [DbContext(typeof(PatientDbContext))]
-    [Migration("20240706114306_IntialMigration")]
-    partial class IntialMigration
+    [Migration("20240706123432_AddUserIdToPatient")]
+    partial class AddUserIdToPatient
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,10 @@ namespace Patient.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

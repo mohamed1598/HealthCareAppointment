@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Patient.Domain.Abstractions;
 using Patient.Domain.ValueObjects;
-using Patient.Infrastructure.DataSource;
+using Patient.Persistence.DataSource;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Patient.Infrastructure.Repositories;
+namespace Patient.Persistence.Repositories;
 
 public class PatientRepository(PatientDbContext context) : IPatientRepository
 {

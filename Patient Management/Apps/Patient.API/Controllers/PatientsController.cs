@@ -24,7 +24,7 @@ namespace Patient.API.Controllers
             var result = await _mediator.Send(request);
             if (result.IsFailure)
                 return BadRequest(result);
-            return Ok(Result.Success("patinet profile registered successfully."));
+            return Ok(Result.Success("patient profile registered successfully."));
         }
 
         [HttpPut]

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Patient.Domain.ValueObjects;
 using System.Reflection.Emit;
 
-namespace Patient.Infrastructure.Configurations;
+namespace Patient.Persistence.Configurations;
 
 public class PatientConfiguration : IEntityTypeConfiguration<Entities.Patient>
 {
@@ -25,13 +25,13 @@ public class PatientConfiguration : IEntityTypeConfiguration<Entities.Patient>
         builder.Property(p => p.Name)
             .HasConversion(
                 name => name.Value,
-                value => Name.Create(value).Value
+                value => Name.Create(value).Value!
             );
 
         builder.Property(p => p.DateOfBirth)
             .HasConversion(
                 dateOfBirth => dateOfBirth.Value,
-                value => DateOfBirth.Create(value).Value
+                value => DateOfBirth.Create(value).Value!
             );
 
         builder.Property(p => p.UserId)
@@ -45,21 +45,21 @@ public class PatientConfiguration : IEntityTypeConfiguration<Entities.Patient>
             contactDetails.Property(cd => cd.PhoneNumber)
                 .HasConversion(
                     phoneNumber => phoneNumber.Value,
-                    value => PhoneNumber.Create(value).Value
+                    value => PhoneNumber.Create(value).Value!
                 )
                 .HasColumnName("PhoneNumber");
 
             contactDetails.Property(cd => cd.Email)
                 .HasConversion(
                     email => email.Value,
-                    value => Email.Create(value).Value
+                    value => Email.Create(value).Value!
                 )
                 .HasColumnName("Email");
 
             contactDetails.Property(cd => cd.Address)
                 .HasConversion(
                     address => address.Value,
-                    value => Address.Create(value).Value
+                    value => Address.Create(value).Value!
                 )
                 .HasColumnName("Address");
         });

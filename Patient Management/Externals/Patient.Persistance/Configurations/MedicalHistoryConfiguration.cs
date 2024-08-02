@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Patient.Domain.Entities;
 using Patient.Domain.ValueObjects;
 
-namespace Patient.Infrastructure.Configurations;
+namespace Patient.Persistence.Configurations;
 
 public class MedicalHistoryConfiguration : IEntityTypeConfiguration<MedicalHistory>
 {
@@ -24,13 +24,13 @@ public class MedicalHistoryConfiguration : IEntityTypeConfiguration<MedicalHisto
         builder.Property(m => m.Diagnosis)
             .HasConversion(
                 firstName => firstName.Value,
-                value => Diagnosis.Create(value).Value
+                value => Diagnosis.Create(value).Value!
             );
 
         builder.Property(m => m.Treatment)
             .HasConversion(
                 lastName => lastName.Value,
-                value => Treatment.Create(value).Value
+                value => Treatment.Create(value).Value!
             );
     }
 }

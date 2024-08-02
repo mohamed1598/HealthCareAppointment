@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Patient.Infrastructure.DataSource;
+namespace Patient.Persistence.DataSource;
 
 public class UnitOfWork(PatientDbContext _context) : IUnitOfWork
 {

@@ -24,7 +24,7 @@ public class UpdatePatientProfileCommandHandler(IUnitOfWork unitOfWork, IPatient
 
     public async Task<Result<Entities.Patient>> Handle(UpdatePatientProfileCommand request, CancellationToken cancellationToken)
     {
-        var patientId = PatientId.Create(request.patientId);
+        var patientId = PatientId.Create(request.PatientId);
         if (patientId.IsFailure) return Result.Failure<Entities.Patient>(patientId.Error!);
 
         var patient = _patientRepository.GetPatientById(patientId.Value!);

@@ -9,4 +9,4 @@ using System.Threading.Tasks;
 
 namespace Patient.Application.Patient.Commands.UpdatePatientProfile;
 
-public sealed record UpdatePatientProfileCommand(Guid patientId,string Name, DateTime DateOfBirth,string PhoneNumber, string Address ,string Email) : IRequest<Result<Entities.Patient>>;
+public sealed record UpdatePatientProfileCommand(Guid PatientId,string Name, DateTime DateOfBirth,string PhoneNumber, string Address ,string Email) : IRequest<Result<Entities.Patient>>;
