@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 
 namespace Doctor.Application.Doctor.Commands.UpdateDoctor;
 
-public class UpdateDoctorCommandValidator : AbstractValidator<UpdateDoctorCommand>
+public partial class UpdateDoctorCommandValidator : AbstractValidator<UpdateDoctorCommand>
 {
-    private static readonly Regex ValidPhoneNumberRegex = new Regex(@"^(011|010|012|015)[0-9]{8}$", RegexOptions.Compiled);
 
     public UpdateDoctorCommandValidator()
     {
@@ -26,7 +25,7 @@ public class UpdateDoctorCommandValidator : AbstractValidator<UpdateDoctorComman
         RuleFor(d => d.PhoneNumber)
             .NotEmpty()
             .WithMessage("Phone number is required.")
-            .Matches(ValidPhoneNumberRegex)
+            .Matches(ValidPhoneNumberRegex())
             .WithMessage("Phone number must start with 011, 010, 012, or 015 followed by 8 digits.");
 
         RuleFor(d => d.Address)
@@ -43,4 +42,7 @@ public class UpdateDoctorCommandValidator : AbstractValidator<UpdateDoctorComman
             .NotEmpty()
             .WithMessage("Specialization is required.");
     }
+
+    [GeneratedRegex(@"^(011|010|012|015)[0-9]{8}$", RegexOptions.Compiled)]
+    private static partial Regex ValidPhoneNumberRegex();
 }

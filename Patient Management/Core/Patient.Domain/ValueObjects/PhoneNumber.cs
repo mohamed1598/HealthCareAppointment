@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Patient.Domain.ValueObjects;
 
-public record PhoneNumber : ValueObject
+public partial record PhoneNumber : ValueObject
 {
     public const int MaxLength = 11; // Typical length of an Egyptian phone number (excluding country code)
-    private static readonly Regex ValidPhoneNumberRegex = new Regex(@"^(011|010|012|015)[0-9]{8}$", RegexOptions.Compiled);
+    private static readonly Regex ValidPhoneNumberRegex = MyRegex();
 
     public PhoneNumber(string value) => Value = value;
     public string Value { get; }
@@ -31,4 +31,7 @@ public record PhoneNumber : ValueObject
 
         return new PhoneNumber(phoneNumber);
     }
+
+    [GeneratedRegex(@"^(011|010|012|015)[0-9]{8}$", RegexOptions.Compiled)]
+    private static partial Regex MyRegex();
 }

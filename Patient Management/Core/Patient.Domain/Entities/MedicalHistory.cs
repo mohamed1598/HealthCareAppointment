@@ -6,7 +6,7 @@ namespace Patient.Domain.Entities
 {
     public class MedicalHistory : Entity<MedicalHistoryId>
     {
-        protected MedicalHistory() : base(MedicalHistoryId.Create(Guid.NewGuid()).Value)
+        protected MedicalHistory() : base(MedicalHistoryId.Create(Guid.NewGuid()).Value!)
         {
         }
         public Diagnosis Diagnosis { get; set; }

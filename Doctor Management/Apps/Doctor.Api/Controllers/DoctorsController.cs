@@ -1,5 +1,7 @@
 ﻿using Doctor.Application.Doctor.Commands.RegisterDoctor;
 using Doctor.Application.Doctor.Commands.UpdateDoctor;
+using Doctor.Application.Doctor.Queries;
+using Doctor.Domain.ValueObjects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Result;
@@ -30,9 +32,9 @@ public class DoctorsController(IMediator mediator) : ControllerBase
         return Ok(Result.Success("Doctor profile updated successfully."));
     }
 
-    //[HttpGet("{id}")]
-    //public async Task<IActionResult> GetPatientDetails(Guid id)
-    //{
-    //    return Ok(await _mediator.Send(new GetPatientDataQuery(new PatientId(id))));
-    //}
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetDoctorDetails(Guid id)
+    {
+        return Ok(await _mediator.Send(new GetDoctorDetailsQuery(new DoctorId(id))));
+    }
 }

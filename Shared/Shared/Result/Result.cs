@@ -17,7 +17,9 @@ public class Result<TValue> : Result
 }
 public class Result
 {
+#pragma warning disable CS0169 // The field 'Result._value' is never used
     private Entity<ValueObject> _value;
+#pragma warning restore CS0169 // The field 'Result._value' is never used
     protected Result() { }
     protected internal Result(bool isSuccess, Error error) {
         if (isSuccess && error != Error.None) throw new InvalidOperationException();
@@ -41,7 +43,7 @@ public class Result
         => new(null,false, error);
 
     public static Result Failure(Error error)
-        => new Result(false, error);
+        => new(false, error);
     protected static Result<TValue> Create<TValue>(TValue value)
         => Success(value);
 
@@ -49,7 +51,7 @@ public class Result
     {
         var failures = results.Where(r => r.IsFailure).ToList();
 
-        if (!failures.Any())
+        if (failures.Count == 0)
         {
             return Success<TValue>();
         }
