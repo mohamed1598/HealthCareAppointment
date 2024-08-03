@@ -14,14 +14,14 @@ using Shared.RabbitMq;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var memberConnectionString = builder.Configuration.GetConnectionString("PatientConnection");
+var patientConnectionString = builder.Configuration.GetConnectionString("PatientConnection");
 builder.Services.AddSingleton<ConvertDomainEventsToOutboxMessagesInterceptors>();
 builder.Services.AddDbContext<PatientDbContext>((sp, optionsBuilder) =>
     {
         var interceptor = sp.GetService<ConvertDomainEventsToOutboxMessagesInterceptors>()!;
         
         optionsBuilder
-            .UseSqlServer(memberConnectionString)
+            .UseSqlServer(patientConnectionString)
             .AddInterceptors(interceptor);
     });
 builder.Services.AddTransient<IEventBus, RabbitMQBus>();
