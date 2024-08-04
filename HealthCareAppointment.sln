@@ -50,9 +50,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doctor.Application", "Docto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doctor.Infrastructure", "Doctor Management\Externals\Doctor.Infrastructure\Doctor.Infrastructure.csproj", "{F3634850-E17B-4DD1-A91D-C3C743AF5B86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doctor.Persistance", "Doctor Management\Externals\Doctor.Persistance\Doctor.Persistance.csproj", "{CDDEB99C-905F-4E11-B979-CD0C7449DBC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doctor.Persistance", "Doctor Management\Externals\Doctor.Persistance\Doctor.Persistance.csproj", "{CDDEB99C-905F-4E11-B979-CD0C7449DBC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doctor.Api", "Doctor Management\Apps\Doctor.Api\Doctor.Api.csproj", "{BCC8EB4C-8218-4F10-9858-07234A88F95C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doctor.Api", "Doctor Management\Apps\Doctor.Api\Doctor.Api.csproj", "{BCC8EB4C-8218-4F10-9858-07234A88F95C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Appointments", "Appointments", "{78729DB5-0143-4987-9ACD-DE3D3A3B8512}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appointments.API", "Appointments\Appointments.API\Appointments.API.csproj", "{ED9C0549-F4C7-45FB-B03E-B127D39DEF05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,6 +116,10 @@ Global
 		{BCC8EB4C-8218-4F10-9858-07234A88F95C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCC8EB4C-8218-4F10-9858-07234A88F95C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCC8EB4C-8218-4F10-9858-07234A88F95C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED9C0549-F4C7-45FB-B03E-B127D39DEF05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED9C0549-F4C7-45FB-B03E-B127D39DEF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED9C0549-F4C7-45FB-B03E-B127D39DEF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED9C0549-F4C7-45FB-B03E-B127D39DEF05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,6 +144,7 @@ Global
 		{F3634850-E17B-4DD1-A91D-C3C743AF5B86} = {E2B241E3-B174-4FB6-98DC-F4749C57C330}
 		{CDDEB99C-905F-4E11-B979-CD0C7449DBC0} = {E2B241E3-B174-4FB6-98DC-F4749C57C330}
 		{BCC8EB4C-8218-4F10-9858-07234A88F95C} = {F0A52B9C-3E53-499E-8A64-6033ACE5E688}
+		{ED9C0549-F4C7-45FB-B03E-B127D39DEF05} = {78729DB5-0143-4987-9ACD-DE3D3A3B8512}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1DF76F1-E512-4083-B68E-D7A24ABD8AD2}
