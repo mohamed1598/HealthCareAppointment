@@ -6,7 +6,17 @@ namespace Appointments.API.Models;
 
 public class Appointment: AggregateRoot<AppointmentId>
 {
-    public AppointmentId Id { get; private set; }
+    private AppointmentId _appointmentId;
+
+    public AppointmentId AppointmentId
+    {
+        get => _appointmentId;
+        private set
+        {
+            _appointmentId = value;
+            Id = value;
+        }
+    }
     public DoctorId DoctorId { get; private set; }
     public PatientId PatientId { get; private set; }
     public DateTime AppointmentDate { get; private set; }
@@ -14,8 +24,16 @@ public class Appointment: AggregateRoot<AppointmentId>
 
     protected Appointment(): base(AppointmentId.Create(Guid.NewGuid()))
     {
-
+        AppointmentId = Id;
     }
+
+    public static Appointment Create(DoctorId doctorId, PatientId patientId, DateTime appointmentDat)
+    {
+        var appointment = new Appointment();
+        appointment.Schedule(doctorId, patientId, appointmentDat);
+        return appointment;
+    }
+
     public void Schedule(DoctorId doctorId, PatientId patientId, DateTime appointmentDate)
     {
         if (Status == AppointmentStatus.Scheduled)
@@ -24,7 +42,7 @@ public class Appointment: AggregateRoot<AppointmentId>
             PatientId = patientId;
             AppointmentDate = appointmentDate;
 
-            RaiseDomainEvent(new AppointmentScheduledDomainEvent(Id,doctorId,patientId,appointmentDate));
+            RaiseDomainEvent(new AppointmentScheduledDomainEvent(AppointmentId,doctorId,patientId,appointmentDate));
         }
         else
         {
@@ -44,7 +62,7 @@ public class Appointment: AggregateRoot<AppointmentId>
         switch (domainEvent)
         {
             case AppointmentScheduledDomainEvent scheduledEvent:
-                Id = scheduledEvent.AppointmentId;
+                AppointmentId = scheduledEvent.AppointmentId;
                 DoctorId = scheduledEvent.DoctorId;
                 PatientId = scheduledEvent.PatientId;
                 AppointmentDate = scheduledEvent.AppointmentDate;
@@ -57,16 +75,13 @@ public class Appointment: AggregateRoot<AppointmentId>
 
     }
 
-    public static Appointment RebuildFromEvents(IEnumerable<IDomainEvent> events)
+    public override void RebuildFromEvents(IEnumerable<IDomainEvent> events)
     {
-        var appointment = new Appointment(); 
+        var appointment = new Appointment();
 
         foreach (var evt in events)
-        {
-            appointment.Apply(evt);
-        }
+           Apply(evt);
 
-        return appointment; 
     }
 }
 

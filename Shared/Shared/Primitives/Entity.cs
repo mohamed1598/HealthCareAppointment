@@ -6,7 +6,7 @@ public abstract class Entity<TId> :IEquatable<Entity<TId>> where TId: ValueObjec
         Id = id;
     }
 
-    public TId Id { get; private init; }
+    public TId Id { get; set; }
     public bool IsDeleted { get; set; }
 
     public static bool operator ==(Entity<TId> left, Entity<TId> right)
